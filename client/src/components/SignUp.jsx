@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import CommonButton from "./CommonButton";
+import { createUser } from "../helpers/UserApis";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -6,6 +8,8 @@ function SignUp() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,22 +19,46 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
-    // Reset the form data after submit
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-    });
+    try {
+      // Call the API to create a user
+      const { name, email, password } = formData;
+      await createUser(name, email, password);
+      setSuccessMessage("Account created successfully!");
+      setError("");
+
+      // Reset the form data
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+      });
+    } catch (err) {
+      setError(err.message);
+      setSuccessMessage("");
+    }
   };
 
   return (
     <div>
-      <h4 className="fw-bolder">Sign Up</h4>
+      <h1 className="fw-semibold">Sign Up</h1>
       <p className="text-muted">Start your 30-day free trial.</p>
+
+      {/* Success Message */}
+      {successMessage && (
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )}
+
+      {/* Error Message */}
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -84,13 +112,12 @@ function SignUp() {
           </small>
         </div>
 
-        <button
-          type="submit"
-          className="btn text-white mt-3"
+        <CommonButton
+          label="Create Account"
+          className="w-100"
           style={{ backgroundColor: "#7F56D9" }}
-        >
-          Create Account
-        </button>
+          type="submit"
+        />
       </form>
     </div>
   );
