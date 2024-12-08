@@ -26,12 +26,12 @@ router.post("/", async (req, res) => {
     }
 
     // Hash the password before saving
-    // const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       name,
       email,
-      password: password,
+      password: hashedPassword,
       google_id,
     });
 

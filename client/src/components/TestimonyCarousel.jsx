@@ -61,7 +61,7 @@ function TestimonyCarousel() {
 
   return (
     <div
-      className="carousel-container d-flex"
+      className="carousel-container d-flex min-vh-100"
       // style={{ borderRadius: "80px 0px 0px 80px" }}
     >
       {/* Previous Feedback */}
@@ -96,7 +96,7 @@ function TestimonyCarousel() {
       )}
 
       {/* Content */}
-      <div className="carousel-content p-5 mt-auto border mx-5 mb-5 rounded-5 shadow-lg">
+      <div className="carousel-content p-5 mt-auto mt-lg-auto border mx-5 mb-5 rounded-5 shadow-lg">
         <p className="fs-3 fw-normal">“{currentFeedback.content}”</p>
         <div className="row">
           <div className="col-lg-8">

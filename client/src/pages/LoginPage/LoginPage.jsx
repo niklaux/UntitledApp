@@ -1,7 +1,7 @@
 import React from "react";
 import LogoBar from "../../components/LogoBar";
-import SignUp from "../../components/SignUp";
 import TestimonyCarousel from "../../components/TestimonyCarousel";
+import AuthForm from "../../components/AuthForm";
 
 function LoginPage() {
   return (
@@ -12,7 +12,9 @@ function LoginPage() {
 
           <div className="row justify-content-center h-100">
             <div className="col-lg-7 col-md-7 col-sm-10 d-flex flex-column justify-content-center my-5">
-              <SignUp />
+              {/* <SignUp /> */}
+              {/* <Login /> */}
+              <AuthForm />
             </div>
           </div>
         </div>
