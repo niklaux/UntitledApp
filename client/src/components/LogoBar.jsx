@@ -2,7 +2,7 @@ import React from "react";
 
 function LogoBar() {
   return (
-    <div className="d-flex align-items-center">
+    <div className="d-flex align-items-center rounded">
       <img
         src="/assets/Logomark.svg"
         alt="Logo"

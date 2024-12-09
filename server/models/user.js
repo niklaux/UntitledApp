@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
-      User.hasMany(models.Feedback, {
-        foreignKey: "user_id", // Foreign key linking to the Feedback model
-        as: "feedbacks", // Alias for accessing user feedbacks
-        onDelete: "CASCADE", // Delete feedbacks when the user is deleted
+      User.belongsToMany(models.Company, {
+        through: models.Users_Companies,
+        foreignKey: 'user_id',
+        otherKey: 'company_id',
       });
     }
   }

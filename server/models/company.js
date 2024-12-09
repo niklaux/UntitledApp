@@ -4,11 +4,10 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Company extends Model {
     static associate(models) {
-      // Many-to-Many relationship with Users through Users_Companies
       Company.belongsToMany(models.User, {
         through: models.Users_Companies,
-        foreignKey: "company_id",
-        as: "users", // Alias for accessing associated users
+        foreignKey: 'company_id',
+        otherKey: 'user_id',
       });
     }
   }
@@ -17,25 +16,27 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
-        allowNull: false, // Company name is required
+        allowNull: false,
       },
       website: {
         type: DataTypes.STRING,
-        allowNull: true, // Optional field
+        allowNull: true,
       },
       about: {
         type: DataTypes.TEXT,
-        allowNull: true, // Optional field
+        allowNull: true,
       },
       country: {
         type: DataTypes.STRING,
-        allowNull: true, // Optional field
+        allowNull: true,
       },
     },
     {
       sequelize,
       modelName: "Company",
-      timestamps: true, // Includes created_at and updated_at
+      timestamps: true, // Enable automatic timestamps
+      createdAt: "created_at", // Map Sequelize's createdAt to created_at
+      updatedAt: "updated_at", // Map Sequelize's updatedAt to updated_at
     }
   );
 
